@@ -54,6 +54,13 @@ jobs:
       TAG: ubuntu1804
       PARAMS: ""
 
+  ubuntu2004:
+    <<: *defaults
+    environment:
+      IMAGE: khos2ow/cloudstack-deb-builder
+      TAG: ubuntu2004
+      PARAMS: ""
+
   latest:
     <<: *defaults
     environment:
@@ -76,6 +83,11 @@ workflows:
             only: /v.*/
 
     - ubuntu1804:
+        filters:
+          tags:
+            only: /v.*/
+
+    - ubuntu2004:
         filters:
           tags:
             only: /v.*/

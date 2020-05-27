@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-.PHONY: all ubuntu1404 ubuntu1604 ubuntu1804 latest
+.PHONY: all ubuntu1404 ubuntu1604 ubuntu1804 ubuntu2004 latest
 
 # Build docker tag based on provided info
 #
@@ -25,7 +25,7 @@ define build_tag
 	docker build -t khos2ow/cloudstack-deb-builder:$(1) $(2)
 endef
 
-all: ubuntu1404 ubuntu1604 ubuntu1804 latest
+all: ubuntu1404 ubuntu1604 ubuntu1804 ubuntu2004 latest
 
 ubuntu1404:
 	$(call build_tag,ubuntu1404,ubuntu1404)
@@ -36,5 +36,8 @@ ubuntu1604:
 ubuntu1804:
 	$(call build_tag,ubuntu1804,ubuntu1804)
 
+ubuntu2004:
+	$(call build_tag,ubuntu2004,ubuntu2004)
+
 latest:
-	$(call build_tag,latest,ubuntu1804)
+	$(call build_tag,latest,ubuntu2004)

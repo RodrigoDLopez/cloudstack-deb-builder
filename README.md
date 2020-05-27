@@ -28,7 +28,8 @@ This will give portable, immutable and reproducable mechanism to build packages 
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`latest`, `ubuntu1804` (ubuntu1804/Dockerfile)](https://github.com/khos2ow/cloudstack-deb-builder/blob/master/ubuntu1804/Dockerfile)
+- [`latest`, `ubuntu2004` (ubuntu2004/Dockerfile)](https://github.com/khos2ow/cloudstack-deb-builder/blob/master/ubuntu2004/Dockerfile)
+- [`ubuntu1804` (ubuntu1804/Dockerfile)](https://github.com/khos2ow/cloudstack-deb-builder/blob/master/ubuntu1804/Dockerfile)
 - [`ubuntu1604` (ubuntu1604/Dockerfile)](https://github.com/khos2ow/cloudstack-deb-builder/blob/master/ubuntu1604/Dockerfile)
 - [`ubuntu1404` (ubuntu1404/Dockerfile)](https://github.com/khos2ow/cloudstack-deb-builder/blob/master/ubuntu1404/Dockerfile)
 
@@ -56,11 +57,11 @@ Building DEB packages with the Docker container is rather easy, a few steps are 
 
 ### Pull Docker images
 
-Let's assume we want to build packages for Ubuntu 16.04 (Xenial). We pull that image first:
+Let's assume we want to build packages for Ubuntu 20.04 (Focal). We pull that image first:
 
-    docker pull khos2ow/cloudstack-deb-builder:ubuntu1604
+    docker pull khos2ow/cloudstack-deb-builder:ubuntu2004
 
-You can replace `ubuntu1604` tag by `ubuntu1804`, `ubuntu1404` or `latest` if you want.
+You can replace `ubuntu2004` tag by `ubuntu1804`, `ubuntu1604`, `ubuntu1404` or `latest` if you want.
 
 ### Build local repository
 
@@ -80,13 +81,13 @@ Now that we have cloned the CloudStack source code locally, we can build package
 
     docker run \
         -v /tmp:/mnt/build \
-        khos2ow/cloudstack-deb-builder:ubuntu1604 [ARGS...]
+        khos2ow/cloudstack-deb-builder:ubuntu2004 [ARGS...]
 
 Or if your local cloudstack folder has other name, you need to map it to `/mnt/build/cloudstack`.
 
     docker run \
         -v /tmp/cloudstack-custom-name:/mnt/build/cloudstack \
-        khos2ow/cloudstack-deb-builder:ubuntu1604 [ARGS...]
+        khos2ow/cloudstack-deb-builder:ubuntu2004 [ARGS...]
 
 After the build has finished the *.deb* packages are available in */tmp/cloudstack/dist/debbuild/DEBS* on the host system.
 
@@ -100,7 +101,7 @@ Now let's assume we want to build packages of `HEAD` of `master` branch from htt
 
     docker run \
         -v /tmp:/mnt/build \
-        khos2ow/cloudstack-deb-builder:ubuntu1604 \
+        khos2ow/cloudstack-deb-builder:ubuntu2004 \
             --git-remote https://github.com/apache/cloudstack.git \
             --git-ref master \
             [ARGS...]
@@ -126,7 +127,7 @@ You can provide Maven cache folder (`~/.m2`) as a volume to the container to mak
     docker run \
         -v /tmp:/mnt/build \
         -v ~/.m2:/root/.m2 \
-        khos2ow/cloudstack-deb-builder:ubuntu1604 [ARGS...]
+        khos2ow/cloudstack-deb-builder:ubuntu2004 [ARGS...]
 
 ### Adjust host owner permission
 
@@ -138,7 +139,7 @@ This is specially useful if you want to use this image in Jenkins job and want t
         -v /tmp:/mnt/build \
         -e "USER_ID=$(id -u)" \
         -e "USER_GID=$(id -g)" \
-        khos2ow/cloudstack-deb-builder:ubuntu1604 [ARGS...]
+        khos2ow/cloudstack-deb-builder:ubuntu2004 [ARGS...]
 
 ## Builder help
 
@@ -146,7 +147,7 @@ To see all the available options you can pass to `docker run ...` command:
 
     docker run \
         -v /tmp:/mnt/build \
-        khos2ow/cloudstack-deb-builder:ubuntu1604 --help
+        khos2ow/cloudstack-deb-builder:ubuntu2004 --help
 
 ## License
 
